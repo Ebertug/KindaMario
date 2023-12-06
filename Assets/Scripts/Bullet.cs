@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
-{
+public class Bullet : MonoBehaviour{
+    
     [Header("Bullet")]
     [SerializeField] float bulletVerticalSpeed = 10f;
     [SerializeField] float bulletHorizontalSpeed = 0f;
-    
+    [SerializeField] AudioClip slimeDeadSFX;
+    [SerializeField] GameObject playerPos;
 
     PlayerMovement player;
     Rigidbody2D myRigidbody;
@@ -35,7 +36,7 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
 
         if(other.tag == "Enemy"){
-
+            AudioSource.PlayClipAtPoint(slimeDeadSFX,playerPos.transform.position);
             Destroy(other.gameObject);
         }
         Destroy(gameObject);

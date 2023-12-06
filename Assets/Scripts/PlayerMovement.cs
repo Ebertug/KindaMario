@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour{
     [Header("Bullet")]
     [SerializeField] GameObject bullet;
     [SerializeField] Transform gun;
+    [SerializeField] AudioClip gunShotSFX;
+    [SerializeField] GameObject playerPos;
     
     
     Vector2 moveInput;
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour{
         if(!isAlive){
             return;
         }   
-           
+        
         Run();
         FlipSprite();
         ClimbLadder();
@@ -57,7 +59,8 @@ public class PlayerMovement : MonoBehaviour{
         if(!isAlive){
             return;
         }
-        Instantiate(bullet, gun.position, transform.rotation);       
+        Instantiate(bullet, gun.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(gunShotSFX,playerPos.transform.position);
     }
 
 
@@ -130,12 +133,13 @@ public class PlayerMovement : MonoBehaviour{
 
 
     void Die(){
-      
+    
         if(myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies","Hazards"))){
             
             isAlive = false;
             myAnimator.SetTrigger("Dying");
             myRigidbody.velocity = deathKick;
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 }  

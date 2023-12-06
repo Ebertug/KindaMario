@@ -20,8 +20,8 @@ TagManager:
   - Enemies
   - Hazards
   - Bullet
-  - 
-  - 
+  - Exit
+  - Coin
   - 
   - 
   - 
@@ -62,6 +62,12 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 2998634423
+    locked: 0
+  - name: Exit
+    uniqueID: 4214542855
+    locked: 0
+  - name: Coin
+    uniqueID: 1622030903
     locked: 0
   - name: Enemy
     uniqueID: 4121533099
